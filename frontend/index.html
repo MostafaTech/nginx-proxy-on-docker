@@ -1,0 +1,24 @@
+<html>
+<head></head>
+<body>
+  <h1>Hello from frontend index.html</h1>
+  <div>
+    <button type="button" onclick="callBackend()">Call Backend</button>
+    <label id="lblMessage">loaded message goes here</label>
+  </div>
+  <script type="text/javascript">
+    function callBackend() {
+      fetch('/api').then(function(r) {
+        if (r.ok) {
+          r.json().then(function(data) {
+            document.getElementById('lblMessage').innerHTML = JSON.stringify(data)
+          })
+        } else {
+          console.log('problem', r.statusText)
+        }
+      }).catch(function(err) {
+        console.warn('error', err)
+      })
+    }
+  </script>
+</body>
